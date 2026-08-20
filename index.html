@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="A responsive random quote generator built with HTML, CSS and JavaScript."
+    >
+
+    <title>QuoteFlow - Random Quote Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="container nav">
+
+            <a href="#" class="logo">
+                <span class="logo-icon">❝</span>
+                <span>QuoteFlow</span>
+            </a>
+
+            <div class="nav-actions">
+
+                <button
+                    class="icon-btn"
+                    id="themeBtn"
+                    aria-label="Toggle dark mode"
+                    title="Toggle theme"
+                >
+                    🌙
+                </button>
+
+                <button
+                    class="favorites-btn"
+                    id="favoritesBtn"
+                >
+                    ❤️
+                    <span>Favorites</span>
+                    <span class="favorite-count" id="favoriteCount">0</span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="container hero-content">
+
+                <span class="badge">
+                    ✨ Daily Inspiration
+                </span>
+
+                <h1>
+                    Find a quote that
+                    <span>inspires you.</span>
+                </h1>
+
+                <p>
+                    Discover powerful words from great thinkers,
+                    writers and leaders around the world.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUOTE APP ================= -->
+
+        <section class="quote-section">
+
+            <div class="container">
+
+                <!-- CATEGORY FILTER -->
+
+                <div class="filter-bar">
+
+                    <div class="category-wrapper">
+
+                        <label for="categorySelect">
+                            Category
+                        </label>
+
+                        <select id="categorySelect">
+
+                            <option value="all">
+                                All Quotes
+                            </option>
+
+                            <option value="motivational">
+                                Motivational
+                            </option>
+
+                            <option value="success">
+                                Success
+                            </option>
+
+                            <option value="life">
+                                Life
+                            </option>
+
+                            <option value="love">
+                                Love
+                            </option>
+
+                            <option value="wisdom">
+                                Wisdom
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="search-wrapper">
+
+                        <label for="searchInput">
+                            Search
+                        </label>
+
+                        <div class="search-box">
+
+                            <span>🔍</span>
+
+                            <input
+                                type="search"
+                                id="searchInput"
+                                placeholder="Search quotes..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUOTE CARD -->
+
+                <div
+                    class="quote-card"
+                    id="quoteCard"
+                >
+
+                    <!-- LOADING STATE -->
+
+                    <div
+                        class="state loading-state hidden"
+                        id="loadingState"
+                    >
+
+                        <div class="spinner"></div>
+
+                        <p>
+                            Finding inspiration...
+                        </p>
+
+                    </div>
+
+
+                    <!-- ERROR STATE -->
+
+                    <div
+                        class="state error-state hidden"
+                        id="errorState"
+                    >
+
+                        <div class="state-icon">
+                            ⚠️
+                        </div>
+
+                        <h3>
+                            Something went wrong
+                        </h3>
+
+                        <p>
+                            We couldn't load a quote.
+                            Please try again.
+                        </p>
+
+                        <button
+                            class="primary-btn"
+                            id="retryBtn"
+                        >
+                            Try Again
+                        </button>
+
+                    </div>
+
+
+                    <!-- EMPTY STATE -->
+
+                    <div
+                        class="state empty-state hidden"
+                        id="emptyState"
+                    >
+
+                        <div class="state-icon">
+                            🔎
+                        </div>
+
+                        <h3>
+                            No quotes found
+                        </h3>
+
+                        <p>
+                            Try another search or category.
+                        </p>
+
+                        <button
+                            class="secondary-btn"
+                            id="clearSearchBtn"
+                        >
+                            Clear Search
+                        </button>
+
+                    </div>
+
+
+                    <!-- QUOTE CONTENT -->
+
+                    <div
+                        id="quoteContent"
+                        class="quote-content"
+                    >
+
+                        <div class="quote-mark">
+                            “
+                        </div>
+
+                        <blockquote id="quoteText">
+                            The future depends on what you do today.
+                        </blockquote>
+
+                        <div class="author">
+                            <span class="author-line"></span>
+
+                            <span id="quoteAuthor">
+                                Mahatma Gandhi
+                            </span>
+                        </div>
+
+                        <div class="quote-category">
+                            <span id="quoteCategory">
+                                Motivational
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div
+                        class="quote-actions"
+                        id="quoteActions"
+                    >
+
+                        <button
+                            class="action-btn"
+                            id="likeBtn"
+                            aria-label="Add to favorites"
+                        >
+                            <span id="likeIcon">♡</span>
+                            <span>Favorite</span>
+                        </button>
+
+                        <button
+                            class="action-btn"
+                            id="copyBtn"
+                        >
+                            📋
+                            <span>Copy</span>
+                        </button>
+
+                        <button
+                            class="action-btn"
+                            id="shareBtn"
+                        >
+                            🔗
+                            <span>Share</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NEW QUOTE -->
+
+                <div class="new-quote-wrapper">
+
+                    <button
+                        class="new-quote-btn"
+                        id="newQuoteBtn"
+                    >
+                        <span>✨</span>
+                        New Quote
+                        <span>→</span>
+                    </button>
+
+                    <p class="keyboard-hint">
+                        Press <kbd>Space</kbd> for a new quote
+                    </p>
+
+                </div>
+
+
+                <!-- STATISTICS -->
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <span class="stat-icon">
+                            💬
+                        </span>
+
+                        <div>
+                            <strong id="quoteCounter">
+                                1
+                            </strong>
+
+                            <small>
+                                Quotes viewed
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span class="stat-icon">
+                            ❤️
+                        </span>
+
+                        <div>
+                            <strong id="statsFavorites">
+                                0
+                            </strong>
+
+                            <small>
+                                Favorites
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span class="stat-icon">
+                            📚
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                50+
+                            </strong>
+
+                            <small>
+                                Quotes available
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FAVORITES MODAL ================= -->
+
+    <div
+        class="modal-overlay hidden"
+        id="modalOverlay"
+    >
+
+        <div class="favorites-modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2>
+                        ❤️ Favorite Quotes
+                    </h2>
+
+                    <p>
+                        Your saved inspiration
+                    </p>
+                </div>
+
+                <button
+                    class="close-btn"
+                    id="closeModalBtn"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="favorites-list"
+                id="favoritesList"
+            >
+                <!-- Favorites generated by JavaScript -->
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+        <span id="toastMessage">
+            Copied!
+        </span>
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <p>
+                © 2026 QuoteFlow. Built with HTML, CSS & JavaScript.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="javascript.js"></script>
+
+</body>
+</html>
